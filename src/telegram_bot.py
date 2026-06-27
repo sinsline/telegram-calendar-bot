@@ -8,6 +8,8 @@ Integrates with all services: NLP, OCR, Calendar, and Speech services.
 import asyncio
 import logging
 import os
+import tempfile
+import hashlib
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any, Union
 from io import BytesIO
@@ -16,6 +18,7 @@ from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message, FSInputFile, BufferedInputFile
 from aiogram.utils.formatting import Text, Bold, Code, Pre
+from aiogram.utils.chat_action import ChatActionSender
 
 from .services import (
     create_nlp_service,
@@ -40,7 +43,8 @@ class TelegramBot:
     """
     
     def __init__(self, token: str, nlp_service=None, ocr_service=None, 
-                 calendar_service=None, speech_service=None):
+                 calendar_service=None, speech_service=None, 
+                 rate_limit_per_minute: int = 20):
         """
         Initialize Telegram bot.
         
@@ -50,17 +54,22 @@ class TelegramBot:
             ocr_service: OCR service instance (optional, will create if None)
             calendar_service: Calendar service instance (optional, will create if None)
             speech_service: Speech service instance (optional, will create if None)
+            rate_limit_per_minute: Max requests per user per minute
         """
-        if not token:
-            raise ValueError("Token is required")
-        
-        self.token = token
         self.bot = Bot(token=token)
         self.dp = Dispatcher()
         
-        # Initialize services
+        # Rate limiting
+        self.rate_limit_per_minute = rate_limit_per_minute
+        self.user_requests = {}  # user_id -> list of timestamps
+        
+        # Initialize services with fallbacks
         self.nlp_service = nlp_service or create_nlp_service()
         self.ocr_service = ocr_service or create_ocr_service()
+        self.calendar_service = calendar_service or create_calendar_service()
+        self.speech_service = speech_service or create_speech_service()
+        
+        self._setup_handlers()
         self.calendar_service = calendar_service or create_calendar_service()
         self.speech_service = speech_service or create_speech_service()
         
@@ -196,6 +205,17 @@ class TelegramBot:
     async def handle_text_message(self, message: Message) -> None:
         """Handle text messages with NLP parsing and calendar creation."""
         try:
+            # Check rate limiting
+            if self._is_rate_limited(message.from_user.id):
+                await message.reply("⏰ Too many requests. Please wait a moment.")
+                return
+                
+            # Sanitize input
+            sanitized_text = self._sanitize_input(message.text or "")
+            if not sanitized_text:
+                await message.reply("❌ Invalid input.")
+                return
+                
             user_lang = self._get_user_language(message.from_user)
             
             # Show processing message
@@ -204,7 +224,7 @@ class TelegramBot:
             
             # Parse event with NLP service
             await self._update_status(status_message, user_lang, 'parsing_event')
-            event_data = self.nlp_service.parse_event_text(message.text)
+            event_data = self.nlp_service.parse_event_text(sanitized_text)
             
             if not event_data.get('has_datetime'):
                 no_datetime_msg = self._get_message(user_lang, 'no_datetime_found')
@@ -389,6 +409,44 @@ class TelegramBot:
             return lang
         else:
             return 'en'  # Default to English
+    
+    def _is_rate_limited(self, user_id: int) -> bool:
+        """Check if user is rate limited."""
+        now = datetime.now()
+        minute_ago = now.timestamp() - 60
+        
+        # Clean old requests 
+        if user_id not in self.user_requests:
+            self.user_requests[user_id] = []
+            
+        self.user_requests[user_id] = [
+            req_time for req_time in self.user_requests[user_id] 
+            if req_time > minute_ago
+        ]
+        
+        # Check limit
+        if len(self.user_requests[user_id]) >= self.rate_limit_per_minute:
+            return True
+            
+        # Add current request
+        self.user_requests[user_id].append(now.timestamp())
+        return False
+    
+    def _sanitize_input(self, text: str) -> str:
+        """Sanitize user input to prevent injection attacks."""
+        if not text:
+            return ""
+            
+        # Remove potentially dangerous characters
+        sanitized = text.replace('<script', '').replace('</script>', '')
+        sanitized = sanitized.replace('javascript:', '').replace('data:', '')
+        
+        # Limit length
+        max_length = 4000
+        if len(sanitized) > max_length:
+            sanitized = sanitized[:max_length]
+            
+        return sanitized.strip()
     
     def _get_message(self, language: str, key: str) -> str:
         """Get localized message."""

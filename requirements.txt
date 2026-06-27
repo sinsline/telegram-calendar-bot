@@ -9,3 +9,21 @@ google-api-python-client>=2.0.0
 openai-whisper>=20231117
 python-dotenv>=1.0.0
 python-dateutil>=2.8.0
+aiofiles>=23.0.0
+
+# CLI and monitoring dependencies
+# Development and monitoring
+click>=8.0.0
+
+# Testing dependencies
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+pytest-xdist>=3.3.0
+flake8>=6.0.0
+black>=23.0.0
+coverage>=7.2.0
+
+# Audio processing
+pydub>=0.25.0
