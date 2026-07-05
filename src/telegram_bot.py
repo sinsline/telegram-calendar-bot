@@ -79,13 +79,13 @@ class TelegramBot:
         # Multi-language messages
         self.messages = {
             'en': {
-                'welcome': "Hello {name}! 👋\\n\\nWelcome to **Telegram Calendar Bot**. I can help you create calendar events from your messages.\\n\\n📝 Send me text, 🎤 voice messages, or 📸 photos containing event information, and I'll add them to your calendar!\\n\\nUse /help to see all available commands.",
-                'help': "**Available commands:**\\n\\n/start - Start the bot\\n/help - Show this help message\\n/events - Show upcoming events\\n/cancel - Cancel current operation\\n\\n**How to use:**\\n\\n📝 **Text:** Send event details like 'Meeting tomorrow at 2 PM'\\n🎤 **Voice:** Record voice messages with event information\\n📸 **Photos:** Send photos of schedules, notes, or text with event details\\n\\nI support multiple languages: English, Russian, German.",
-                'events_header': "📅 **Upcoming events:**\\n\\n",
+                'welcome': "Hello {name}! 👋\n\nWelcome to **Telegram Calendar Bot**. I can help you create calendar events from your messages.\n\n📝 Send me text, 🎤 voice messages, or 📸 photos containing event information, and I'll add them to your calendar!\n\nUse /help to see all available commands.",
+                'help': "**Available commands:**\n\n/start - Start the bot\n/help - Show this help message\n/events - Show upcoming events\n/cancel - Cancel current operation\n\n**How to use:**\n\n📝 **Text:** Send event details like 'Meeting tomorrow at 2 PM'\n🎤 **Voice:** Record voice messages with event information\n📸 **Photos:** Send photos of schedules, notes, or text with event details\n\nI support multiple languages: English, Russian, German.",
+                'events_header': "📅 **Upcoming events:**\n\n",
                 'no_events': "No upcoming events found.",
-                'event_created': "✅ **Event created successfully!**\\n\\n📝 **Title:** {title}\\n📅 **Date:** {date}\\n🔗 [View in Calendar]({link})",
+                'event_created': "✅ **Event created successfully!**\n\n📝 **Title:** {title}\n📅 **Date:** {date}\n🔗 [View in Calendar]({link})",
                 'operation_cancelled': "❌ Operation cancelled.",
-                'error': "❌ **Error:** {error}\\n\\nPlease try again or contact support.",
+                'error': "❌ **Error:** {error}\n\nPlease try again or contact support.",
                 'no_datetime_found': "⚠️ No date/time information found in your message. Please include when the event should happen.",
                 'processing': "🔄 Processing your request...",
                 'transcribing': "🎤 Transcribing voice message...",
@@ -93,13 +93,13 @@ class TelegramBot:
                 'parsing_event': "📝 Analyzing event details..."
             },
             'ru': {
-                'welcome': "Привет {name}! 👋\\n\\nДобро пожаловать в **Telegram Calendar Bot**. Я помогу вам создавать события календаря из ваших сообщений.\\n\\n📝 Отправьте мне текст, 🎤 голосовые сообщения или 📸 фотографии с информацией о событиях, и я добавлю их в ваш календарь!\\n\\nИспользуйте /help для просмотра всех доступных команд.",
-                'help': "**Доступные команды:**\\n\\n/start - Запустить бота\\n/help - Показать это сообщение справки\\n/events - Показать предстоящие события\\n/cancel - Отменить текущую операцию\\n\\n**Как использовать:**\\n\\n📝 **Текст:** Отправьте детали события, например 'Встреча завтра в 14:00'\\n🎤 **Голос:** Запишите голосовые сообщения с информацией о событии\\n📸 **Фото:** Отправьте фотографии расписаний, заметок или текста с деталями события\\n\\nЯ поддерживаю несколько языков: английский, русский, немецкий.",
-                'events_header': "📅 **Предстоящие события:**\\n\\n",
+                'welcome': "Привет {name}! 👋\n\nДобро пожаловать в **Telegram Calendar Bot**. Я помогу вам создавать события календаря из ваших сообщений.\n\n📝 Отправьте мне текст, 🎤 голосовые сообщения или 📸 фотографии с информацией о событиях, и я добавлю их в ваш календарь!\n\nИспользуйте /help для просмотра всех доступных команд.",
+                'help': "**Доступные команды:**\n\n/start - Запустить бота\n/help - Показать это сообщение справки\n/events - Показать предстоящие события\n/cancel - Отменить текущую операцию\n\n**Как использовать:**\n\n📝 **Текст:** Отправьте детали события, например 'Встреча завтра в 14:00'\n🎤 **Голос:** Запишите голосовые сообщения с информацией о событии\n📸 **Фото:** Отправьте фотографии расписаний, заметок или текста с деталями события\n\nЯ поддерживаю несколько языков: английский, русский, немецкий.",
+                'events_header': "📅 **Предстоящие события:**\n\n",
                 'no_events': "Предстоящих событий не найдено.",
-                'event_created': "✅ **Событие успешно создано!**\\n\\n📝 **Название:** {title}\\n📅 **Дата:** {date}\\n🔗 [Посмотреть в календаре]({link})",
+                'event_created': "✅ **Событие успешно создано!**\n\n📝 **Название:** {title}\n📅 **Дата:** {date}\n🔗 [Посмотреть в календаре]({link})",
                 'operation_cancelled': "❌ Операция отменена.",
-                'error': "❌ **Ошибка:** {error}\\n\\nПожалуйста, попробуйте еще раз или обратитесь в поддержку.",
+                'error': "❌ **Ошибка:** {error}\n\nПожалуйста, попробуйте еще раз или обратитесь в поддержку.",
                 'no_datetime_found': "⚠️ В вашем сообщении не найдена информация о дате/времени. Пожалуйста, укажите, когда должно произойти событие.",
                 'processing': "🔄 Обработка вашего запроса...",
                 'transcribing': "🎤 Расшифровка голосового сообщения...",
@@ -107,13 +107,13 @@ class TelegramBot:
                 'parsing_event': "📝 Анализ деталей события..."
             },
             'de': {
-                'welcome': "Hallo {name}! 👋\\n\\nWillkommen bei **Telegram Calendar Bot**. Ich helfe dir dabei, Kalenderereignisse aus deinen Nachrichten zu erstellen.\\n\\n📝 Sende mir Text, 🎤 Sprachnachrichten oder 📸 Fotos mit Ereignisinformationen, und ich füge sie zu deinem Kalender hinzu!\\n\\nVerwende /help, um alle verfügbaren Befehle zu sehen.",
-                'help': "**Verfügbare Befehle:**\\n\\n/start - Bot starten\\n/help - Diese Hilfemeldung anzeigen\\n/events - Kommende Termine anzeigen\\n/cancel - Aktuelle Operation abbrechen\\n\\n**Verwendung:**\\n\\n📝 **Text:** Sende Ereignisdetails wie 'Besprechung morgen um 14 Uhr'\\n🎤 **Sprache:** Nimm Sprachnachrichten mit Ereignisinformationen auf\\n📸 **Fotos:** Sende Fotos von Terminplänen, Notizen oder Text mit Ereignisdetails\\n\\nIch unterstütze mehrere Sprachen: Englisch, Russisch, Deutsch.",
-                'events_header': "📅 **Kommende Termine:**\\n\\n",
+                'welcome': "Hallo {name}! 👋\n\nWillkommen bei **Telegram Calendar Bot**. Ich helfe dir dabei, Kalenderereignisse aus deinen Nachrichten zu erstellen.\n\n📝 Sende mir Text, 🎤 Sprachnachrichten oder 📸 Fotos mit Ereignisinformationen, und ich füge sie zu deinem Kalender hinzu!\n\nVerwende /help, um alle verfügbaren Befehle zu sehen.",
+                'help': "**Verfügbare Befehle:**\n\n/start - Bot starten\n/help - Diese Hilfemeldung anzeigen\n/events - Kommende Termine anzeigen\n/cancel - Aktuelle Operation abbrechen\n\n**Verwendung:**\n\n📝 **Text:** Sende Ereignisdetails wie 'Besprechung morgen um 14 Uhr'\n🎤 **Sprache:** Nimm Sprachnachrichten mit Ereignisinformationen auf\n📸 **Fotos:** Sende Fotos von Terminplänen, Notizen oder Text mit Ereignisdetails\n\nIch unterstütze mehrere Sprachen: Englisch, Russisch, Deutsch.",
+                'events_header': "📅 **Kommende Termine:**\n\n",
                 'no_events': "Keine kommenden Termine gefunden.",
-                'event_created': "✅ **Ereignis erfolgreich erstellt!**\\n\\n📝 **Titel:** {title}\\n📅 **Datum:** {date}\\n🔗 [Im Kalender anzeigen]({link})",
+                'event_created': "✅ **Ereignis erfolgreich erstellt!**\n\n📝 **Titel:** {title}\n📅 **Datum:** {date}\n🔗 [Im Kalender anzeigen]({link})",
                 'operation_cancelled': "❌ Operation abgebrochen.",
-                'error': "❌ **Fehler:** {error}\\n\\nBitte versuche es erneut oder wende dich an den Support.",
+                'error': "❌ **Fehler:** {error}\n\nBitte versuche es erneut oder wende dich an den Support.",
                 'no_datetime_found': "⚠️ Keine Datum-/Zeitinformationen in deiner Nachricht gefunden. Bitte gib an, wann das Ereignis stattfinden soll.",
                 'processing': "🔄 Verarbeite deine Anfrage...",
                 'transcribing': "🎤 Transkribiere Sprachnachricht...",
@@ -180,7 +180,7 @@ class TelegramBot:
             
             for i, event in enumerate(events[:10], 1):  # Limit to 10 events
                 formatted_event = self._format_event_for_display(event)
-                events_text += f"{i}. {formatted_event}\\n\\n"
+                events_text += f"{i}. {formatted_event}\n\n"
             
             await message.reply(events_text, parse_mode="Markdown", disable_web_page_preview=True)
             
@@ -280,7 +280,7 @@ class TelegramBot:
             
             # Send success message with transcribed text
             success_msg = await self._format_success_message(calendar_event, user_lang)
-            success_msg += f"\\n\\n🎤 **Transcribed:** {transcribed_text}"
+            success_msg += f"\n🎤 {transcribed_text}"
             
             await status_message.edit_text(success_msg, parse_mode="Markdown", disable_web_page_preview=True)
             
@@ -327,7 +327,7 @@ class TelegramBot:
             
             # Send success message with extracted text
             success_msg = await self._format_success_message(calendar_event, user_lang)
-            success_msg += f"\\n\\n📸 **Extracted text:** {extracted_text[:100]}{'...' if len(extracted_text) > 100 else ''}"
+            success_msg += f"\n📸 {extracted_text[:200]}{'...' if len(extracted_text) > 200 else ''}"
             
             await status_message.edit_text(success_msg, parse_mode="Markdown", disable_web_page_preview=True)
             
@@ -358,39 +358,72 @@ class TelegramBot:
         calendar_event_data = {
             'summary': event_data['title'],
             'start': datetime_info['datetime'],
-            'description': f"Created from Telegram by Calendar Bot\\n\\nOriginal text: {event_data['original_text']}"
+            'description': f"Created from Telegram by Calendar Bot\n\nOriginal text: {event_data['original_text']}"
         }
         
         # Create event
         return self.calendar_service.create_event(calendar_event_data)
     
-    async def _format_success_message(self, calendar_event: Dict[str, Any], user_lang: str) -> str:
-        """Format success message for event creation."""
-        title = calendar_event.get('summary', 'Event')
-        
-        # Format datetime
-        start_time = calendar_event.get('start', {})
-        if isinstance(start_time, dict):
-            date_str = start_time.get('dateTime', 'Unknown time')
+    def _event_emoji(self, text):
+        t=(text or "").lower()
+        groups=[
+            ("\U0001F9B7",["zahn","kiefer","zahnspange","ортодонт","стоматолог","зуб","dentist"]),
+            ("\U0001FA7A",["arzt","doctor","врач","доктор","praxis","klinik","blut","mrt","приём","прием"]),
+            ("\U0001F4DE",["anruf","anrufen","call","позвон","звон","telefon"]),
+            ("\U0001F382",["geburtstag","birthday","день рожд"]),
+            ("\U0001F4DD",["meeting","zoom","встреч","besprechung","termin"]),
+        ]
+        for emoji,kws in groups:
+            for kw in kws:
+                if kw in t:
+                    return emoji
+        return "\U0001F4DD"
+
+    def _labels(self, lang):
+        L={
+            'de':{'added':'Hinzugefügt','date':'Datum','time':'Zeit'},
+            'ru':{'added':'Добавлено','date':'Дата','time':'Время'},
+            'en':{'added':'Added','date':'Date','time':'Time'},
+        }
+        return L.get(lang,L['en'])
+
+    def _format_dt_localized(self, dt, lang):
+        months={
+            'de':['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+            'ru':['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],
+        }
+        wd={'de':['Mo','Di','Mi','Do','Fr','Sa','So'],
+            'ru':['пн','вт','ср','чт','пт','сб','вс']}
+        if lang in months:
+            if lang=='de':
+                date_str=f"{dt.day}. {months[lang][dt.month-1]} ({wd[lang][dt.weekday()]})"
+            else:
+                date_str=f"{dt.day} {months[lang][dt.month-1]} ({wd[lang][dt.weekday()]})"
         else:
-            date_str = str(start_time)
-        
-        # Try to parse and format date nicely
+            date_str=dt.strftime('%B %d')
+        return date_str, dt.strftime('%H:%M')
+
+    async def _format_success_message(self, calendar_event, user_lang):
+        """Build a Toki-style event card."""
+        lab=self._labels(user_lang)
+        title=calendar_event.get('summary','Event')
+        emoji=self._event_emoji(title)
+        start=calendar_event.get('start',{})
+        date_str=start.get('dateTime','') if isinstance(start,dict) else str(start)
+        time_str=''
         try:
-            if 'T' in date_str:
-                dt = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
-                date_str = dt.strftime('%B %d, %Y at %H:%M')
-        except:
-            pass  # Keep original string if parsing fails
-        
-        link = calendar_event.get('htmlLink', '#')
-        
-        return self._get_message(user_lang, 'event_created').format(
-            title=title,
-            date=date_str,
-            link=link
-        )
-    
+            if date_str and 'T' in date_str:
+                dt=datetime.fromisoformat(date_str.replace('Z','+00:00'))
+                date_str,time_str=self._format_dt_localized(dt,user_lang)
+        except Exception:
+            pass
+        lines=[f"{emoji} [{title}] {lab['added']}"]
+        if date_str:
+            lines.append(f"· {lab['date']}: {date_str}")
+        if time_str:
+            lines.append(f"· {lab['time']}: {time_str}")
+        return "\n".join(lines)
+
     async def _update_status(self, status_message: Message, user_lang: str, status_key: str) -> None:
         """Update status message."""
         try:
