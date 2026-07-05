@@ -255,7 +255,8 @@ class TelegramBot:
             
             # Download voice file
             file = await self.bot.get_file(message.voice.file_id)
-            voice_data = await self.bot.download_file(file.file_path)
+            voice_file = await self.bot.download_file(file.file_path)
+            voice_data = voice_file.read()
             
             # Transcribe speech
             await self._update_status(status_message, user_lang, 'transcribing')
