@@ -302,7 +302,8 @@ class TelegramBot:
             # Download photo (get the largest size)
             photo = message.photo[-1]
             file = await self.bot.get_file(photo.file_id)
-            photo_data = await self.bot.download_file(file.file_path)
+            photo_file = await self.bot.download_file(file.file_path)
+            photo_data = photo_file.read()
             
             # Extract text with OCR
             await self._update_status(status_message, user_lang, 'extracting_text')
@@ -523,6 +524,13 @@ async def main():
 
 
 if __name__ == '__main__':
+    # Load environment variables from .env if present
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
+
     # Setup logging
     logging.basicConfig(
         level=logging.INFO,
